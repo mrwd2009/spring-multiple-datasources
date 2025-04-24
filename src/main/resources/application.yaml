@@ -1,0 +1,50 @@
+server:
+  port: ${APP_PORT:8090}
+
+spring:
+  config:
+    import: optional:classpath:.env[.properties]
+  application:
+    name: smd-main
+  datasource:
+    base-model:
+      jdbc-url: "${APP_DB_BASE_URL}/smd-base-model"
+      username: ${APP_DB_USERNAME}
+      password: ${APP_DB_PASSWORD}
+      maximum-pool-size: 10
+    contract-model:
+      jdbc-url: "${APP_DB_BASE_URL}/smd-contract-model"
+      username: ${APP_DB_USERNAME}
+      password: ${APP_DB_PASSWORD}
+      maximum-pool-size: 10
+    billing-model:
+      jdbc-url: "${APP_DB_BASE_URL}/smd-billing-model"
+      username: ${APP_DB_USERNAME}
+      password: ${APP_DB_PASSWORD}
+      maximum-pool-size: 10
+    global-meta:
+      jdbc-url: "${APP_DB_BASE_URL}/smd-global-meta"
+      username: ${APP_DB_USERNAME}
+      password: ${APP_DB_PASSWORD}
+      maximum-pool-size: 10
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+logging:
+  level:
+    # https://stackoverflow.com/questions/1710476/how-to-print-a-query-string-with-parameter-values-when-using-hibernate
+    # basic log level for all messages
+    org.hibernate: INFO
+    # SQL statements and parameters
+    org.hibernate.sql: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    # Statistics and slow queries
+    org.hibernate.stat: DEBUG
+    org.hibernate.SQL_SLOW: INFO
+    # 2nd Level Cache
+    org.hibernate.cache: DEBUG
+
+app:
+  base-uri: "/api"
