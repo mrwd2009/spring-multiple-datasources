@@ -1,11 +1,13 @@
 server:
   port: ${APP_PORT:8090}
 
+#debug: true
+
 spring:
   config:
     import: optional:classpath:.env[.properties]
   application:
-    name: smd-main
+    name: smd
   datasource:
     base-model:
       jdbc-url: "${APP_DB_BASE_URL}/smd-base-model"
